@@ -1,45 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Ma première page colorée</title>
+    <title>Changer la couleur du texte</title>
     <style>
-        body {
-            background-color: #f0f8ff; /* Bleu très clair pour le fond */
-            font-family: Arial, sans-serif;
+        #monTexte {
+            font-size: 24px;
+            color: black;
         }
 
-        h1 {
-            color: red;
-        }
-
-        p {
-            color: green;
-        }
-
-        .bleu {
-            color: blue;
-        }
-
-        .violet {
-            color: purple;
-        }
-
-        .orange {
-            color: orange;
+        button {
+            margin: 5px;
+            padding: 10px;
+            font-size: 16px;
         }
     </style>
 </head>
 <body>
 
-    <h1>Bienvenue sur ma page !</h1>
+    <h1 id="monTexte">Ceci est un texte coloré</h1>
 
-    <p>Ceci est un texte vert.</p>
+    <button onclick="changerCouleur('red')">Rouge</button>
+    <button onclick="changerCouleur('blue')">Bleu</button>
+    <button onclick="changerCouleur('green')">Vert</button>
+    <button onclick="changerCouleur('purple')">Violet</button>
 
-    <p class="bleu">Et celui-ci est bleu.</p>
-
-    <p class="violet">Ce texte est violet.</p>
-
-    <p class="orange">Celui-ci est orange.</p>
+    <script>
+        function changerCouleur(couleur) {
+            document.getElementById('monTexte').style.color = couleur;
+        }
+    </script>
 
 </body>
 </html>
