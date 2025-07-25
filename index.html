@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz HTML/CSS/JS - Niveau 2</title>
+    <title>Quiz Structure HTML & Styles CSS</title>
     <style>
         * {
             margin: 0;
@@ -13,22 +13,22 @@
 
         body {
             font-family: 'Comic Sans MS', cursive, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
             min-height: 100vh;
             padding: 20px;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 950px;
             margin: 0 auto;
             background: white;
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
             overflow: hidden;
         }
 
         .header {
-            background: linear-gradient(45deg, #4CAF50, #45a049);
+            background: linear-gradient(45deg, #667eea, #764ba2);
             color: white;
             text-align: center;
             padding: 30px 20px;
@@ -58,7 +58,7 @@
         }
 
         .progress {
-            background: linear-gradient(45deg, #4CAF50, #45a049);
+            background: linear-gradient(45deg, #667eea, #764ba2);
             height: 100%;
             border-radius: 6px;
             transition: width 0.3s ease;
@@ -91,7 +91,7 @@
         }
 
         .question-number {
-            background: #4CAF50;
+            background: #667eea;
             color: white;
             border-radius: 50%;
             width: 45px;
@@ -120,46 +120,73 @@
             margin: 15px 0;
             font-size: 14px;
             overflow-x: auto;
-            border-left: 4px solid #4CAF50;
+            border-left: 4px solid #667eea;
+            line-height: 1.5;
         }
 
-        .html-tag {
+        .html-structure {
             color: #ff6b6b;
         }
 
-        .css-property {
+        .css-selector {
             color: #4ecdc4;
         }
 
-        .js-function {
+        .css-property {
             color: #ffe66d;
         }
 
-        .visual-example {
-            border: 2px dashed #ccc;
+        .visual-demo {
+            border: 2px solid #ddd;
             padding: 20px;
             margin: 15px 0;
             border-radius: 10px;
             background: #fafafa;
+        }
+
+        .demo-html-structure {
+            font-family: monospace;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+            margin: 10px 0;
+        }
+
+        .demo-css-result {
+            background: white;
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .demo-text-large {
+            font-size: 24px;
+        }
+
+        .demo-text-italic {
+            font-style: italic;
+        }
+
+        .demo-text-underline {
+            text-decoration: underline;
+        }
+
+        .demo-border {
+            border: 3px solid #ff6b6b;
+            padding: 10px;
+            margin: 5px 0;
+        }
+
+        .demo-centered {
             text-align: center;
         }
 
-        .demo-button {
-            background: #ff6b6b;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            margin: 5px;
-        }
-
-        .demo-text {
-            font-size: 1.2em;
-            margin: 10px 0;
+        .demo-width {
+            width: 200px;
+            background-color: #e3f2fd;
             padding: 10px;
-            border-radius: 5px;
         }
 
         .answers {
@@ -181,18 +208,18 @@
         }
 
         .answer-option:hover {
-            border-color: #4CAF50;
+            border-color: #667eea;
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         .answer-option.selected {
-            border-color: #4CAF50;
-            background: #e8f5e8;
+            border-color: #667eea;
+            background: #e8f0fe;
         }
 
         .answer-option.correct {
-            border-color: #4CAF50;
+            border-color: #28a745;
             background: #d4edda;
             animation: correctPulse 0.6s ease;
         }
@@ -224,7 +251,7 @@
         }
 
         .btn {
-            background: linear-gradient(45deg, #4CAF50, #45a049);
+            background: linear-gradient(45deg, #667eea, #764ba2);
             color: white;
             border: none;
             padding: 12px 25px;
@@ -315,8 +342,8 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🚀 Quiz HTML/CSS/JS</h1>
-            <p>Niveau 2 - Avec un peu de JavaScript !</p>
+            <h1>🏗️ Structure HTML & Styles CSS</h1>
+            <p>Apprenons les fondations du web !</p>
         </div>
 
         <div class="quiz-container">
@@ -327,159 +354,216 @@
             <!-- Question 1 -->
             <div class="question-card active" data-question="1">
                 <div class="question-number">1</div>
-                <div class="question-title">Quelle balise HTML utilise-t-on pour créer une liste non ordonnée ?</div>
-                <div class="code-example">
-<span class="html-tag">&lt;???&gt;</span>
-  <span class="html-tag">&lt;li&gt;</span>Pommes<span class="html-tag">&lt;/li&gt;</span>
-  <span class="html-tag">&lt;li&gt;</span>Bananes<span class="html-tag">&lt;/li&gt;</span>
-<span class="html-tag">&lt;/???&gt;</span>
+                <div class="question-title">Quelle est la structure de base d'une page HTML ?</div>
+                <div class="visual-demo">
+                    <div class="demo-html-structure">
+                        &lt;!DOCTYPE html&gt;<br>
+                        &lt;html&gt;<br>
+                        &nbsp;&nbsp;&lt;head&gt;...&lt;/head&gt;<br>
+                        &nbsp;&nbsp;&lt;body&gt;...&lt;/body&gt;<br>
+                        &lt;/html&gt;
+                    </div>
                 </div>
                 <div class="answers">
-                    <div class="answer-option" data-answer="a">&lt;ol&gt;</div>
-                    <div class="answer-option" data-answer="b">&lt;ul&gt;</div>
-                    <div class="answer-option" data-answer="c">&lt;list&gt;</div>
+                    <div class="answer-option" data-answer="a">html → head → body</div>
+                    <div class="answer-option" data-answer="b">body → head → html</div>
+                    <div class="answer-option" data-answer="c">head → html → body</div>
                 </div>
             </div>
 
             <!-- Question 2 -->
             <div class="question-card" data-question="2">
                 <div class="question-number">2</div>
-                <div class="question-title">En CSS, comment fait-on pour changer la couleur de fond ?</div>
+                <div class="question-title">Que contient la balise &lt;head&gt; ?</div>
                 <div class="code-example">
-div {
-  <span class="css-property">??? : lightblue;</span>
-}
+<span class="html-structure">&lt;head&gt;</span>
+  <span class="html-structure">&lt;title&gt;</span>Ma Page<span class="html-structure">&lt;/title&gt;</span>
+  <span class="html-structure">&lt;meta charset="UTF-8"&gt;</span>
+<span class="html-structure">&lt;/head&gt;</span>
                 </div>
                 <div class="answers">
-                    <div class="answer-option" data-answer="a">color</div>
-                    <div class="answer-option" data-answer="b">background-color</div>
-                    <div class="answer-option" data-answer="c">bg-color</div>
+                    <div class="answer-option" data-answer="a">Le contenu visible de la page</div>
+                    <div class="answer-option" data-answer="b">Les informations sur la page (titre, métadonnées)</div>
+                    <div class="answer-option" data-answer="c">Les images et vidéos</div>
                 </div>
             </div>
 
             <!-- Question 3 -->
             <div class="question-card" data-question="3">
+                <div class="question-title">En CSS, comment sélectionne-t-on TOUS les paragraphes ?</div>
                 <div class="question-number">3</div>
-                <div class="question-title">Que fait cette ligne de JavaScript ?</div>
                 <div class="code-example">
-<span class="js-function">document.getElementById("monTexte")</span>
+<span class="css-selector">???</span> {
+  <span class="css-property">color: blue;</span>
+}
                 </div>
                 <div class="answers">
-                    <div class="answer-option" data-answer="a">Elle trouve l'élément HTML qui a l'id "monTexte"</div>
-                    <div class="answer-option" data-answer="b">Elle crée un nouveau texte</div>
-                    <div class="answer-option" data-answer="c">Elle supprime l'élément "monTexte"</div>
+                    <div class="answer-option" data-answer="a">p</div>
+                    <div class="answer-option" data-answer="b">#p</div>
+                    <div class="answer-option" data-answer="c">.p</div>
                 </div>
             </div>
 
             <!-- Question 4 -->
             <div class="question-card" data-question="4">
                 <div class="question-number">4</div>
-                <div class="question-title">Comment donne-t-on un identifiant à un élément HTML ?</div>
-                <div class="code-example">
-<span class="html-tag">&lt;p ??? = "monParagraphe"&gt;</span>Bonjour !<span class="html-tag">&lt;/p&gt;</span>
+                <div class="question-title">Que fait la propriété CSS "font-size" ?</div>
+                <div class="visual-demo">
+                    <div class="demo-css-result">
+                        <p style="font-size: 12px;">Petit texte (12px)</p>
+                        <p style="font-size: 18px;">Texte moyen (18px)</p>
+                        <p style="font-size: 24px;">Grand texte (24px)</p>
+                    </div>
                 </div>
                 <div class="answers">
-                    <div class="answer-option" data-answer="a">class</div>
-                    <div class="answer-option" data-answer="b">id</div>
-                    <div class="answer-option" data-answer="c">name</div>
+                    <div class="answer-option" data-answer="a">Change la couleur du texte</div>
+                    <div class="answer-option" data-answer="b">Change la taille du texte</div>
+                    <div class="answer-option" data-answer="c">Change la police du texte</div>
                 </div>
             </div>
 
             <!-- Question 5 -->
             <div class="question-card" data-question="5">
                 <div class="question-number">5</div>
-                <div class="question-title">En CSS, comment fait-on pour rendre un texte en gras ?</div>
+                <div class="question-title">Comment sélectionne-t-on un élément avec l'id "monTitre" en CSS ?</div>
                 <div class="code-example">
-h2 {
-  <span class="css-property">??? : bold;</span>
+<span class="html-structure">&lt;h1 id="monTitre"&gt;</span>Bonjour<span class="html-structure">&lt;/h1&gt;</span>
+
+<span class="css-selector">???</span> {
+  <span class="css-property">color: red;</span>
 }
                 </div>
                 <div class="answers">
-                    <div class="answer-option" data-answer="a">text-weight</div>
-                    <div class="answer-option" data-answer="b">font-weight</div>
-                    <div class="answer-option" data-answer="c">bold</div>
+                    <div class="answer-option" data-answer="a">.monTitre</div>
+                    <div class="answer-option" data-answer="b">#monTitre</div>
+                    <div class="answer-option" data-answer="c">monTitre</div>
                 </div>
             </div>
 
             <!-- Question 6 -->
             <div class="question-card" data-question="6">
                 <div class="question-number">6</div>
-                <div class="question-title">Comment change-t-on le contenu d'un élément en JavaScript ?</div>
-                <div class="visual-example">
-                    <p id="demoText" class="demo-text">Texte original</p>
-                    <button class="demo-button" onclick="changeText()">Changer le texte</button>
-                </div>
-                <div class="code-example">
-document.getElementById("demoText").<span class="js-function">???</span> = "Nouveau texte";
+                <div class="question-title">Que fait la propriété CSS "text-decoration" ?</div>
+                <div class="visual-demo">
+                    <div class="demo-css-result">
+                        <p style="text-decoration: none;">Texte normal</p>
+                        <p style="text-decoration: underline;">Texte souligné</p>
+                        <p style="text-decoration: line-through;">Texte barré</p>
+                    </div>
                 </div>
                 <div class="answers">
-                    <div class="answer-option" data-answer="a">innerHTML</div>
-                    <div class="answer-option" data-answer="b">text</div>
-                    <div class="answer-option" data-answer="c">content</div>
+                    <div class="answer-option" data-answer="a">Ajoute des décorations comme soulignage ou barré</div>
+                    <div class="answer-option" data-answer="b">Change la couleur du texte</div>
+                    <div class="answer-option" data-answer="c">Change la taille du texte</div>
                 </div>
             </div>
 
             <!-- Question 7 -->
             <div class="question-card" data-question="7">
                 <div class="question-number">7</div>
-                <div class="question-title">Quelle balise HTML utilise-t-on pour créer un bouton ?</div>
-                <div class="visual-example">
-                    <button class="demo-button">Je suis un bouton !</button>
+                <div class="question-title">Comment sélectionne-t-on tous les éléments avec la classe "rouge" ?</div>
+                <div class="code-example">
+<span class="html-structure">&lt;p class="rouge"&gt;</span>Texte 1<span class="html-structure">&lt;/p&gt;</span>
+<span class="html-structure">&lt;h2 class="rouge"&gt;</span>Titre<span class="html-structure">&lt;/h2&gt;</span>
+
+<span class="css-selector">???</span> {
+  <span class="css-property">color: red;</span>
+}
                 </div>
                 <div class="answers">
-                    <div class="answer-option" data-answer="a">&lt;btn&gt;</div>
-                    <div class="answer-option" data-answer="b">&lt;button&gt;</div>
-                    <div class="answer-option" data-answer="c">&lt;click&gt;</div>
+                    <div class="answer-option" data-answer="a">#rouge</div>
+                    <div class="answer-option" data-answer="b">.rouge</div>
+                    <div class="answer-option" data-answer="c">rouge</div>
                 </div>
             </div>
 
             <!-- Question 8 -->
             <div class="question-card" data-question="8">
                 <div class="question-number">8</div>
-                <div class="question-title">En CSS, comment fait-on pour espacer les éléments à l'intérieur d'une boîte ?</div>
-                <div class="code-example">
-.boite {
-  <span class="css-property">??? : 20px;</span>
-}
+                <div class="question-title">Que fait la propriété CSS "border" ?</div>
+                <div class="visual-demo">
+                    <div class="demo-css-result">
+                        <div style="border: 1px solid black; padding: 10px; margin: 5px;">Bordure fine</div>
+                        <div style="border: 3px solid red; padding: 10px; margin: 5px;">Bordure épaisse rouge</div>
+                        <div style="border: 2px dashed blue; padding: 10px; margin: 5px;">Bordure pointillée bleue</div>
+                    </div>
                 </div>
                 <div class="answers">
-                    <div class="answer-option" data-answer="a">margin</div>
-                    <div class="answer-option" data-answer="b">padding</div>
-                    <div class="answer-option" data-answer="c">space</div>
+                    <div class="answer-option" data-answer="a">Ajoute une bordure autour de l'élément</div>
+                    <div class="answer-option" data-answer="b">Change la couleur de fond</div>
+                    <div class="answer-option" data-answer="c">Change la taille de l'élément</div>
                 </div>
             </div>
 
             <!-- Question 9 -->
             <div class="question-card" data-question="9">
                 <div class="question-number">9</div>
-                <div class="question-title">Comment fait-on pour cacher un élément en JavaScript ?</div>
-                <div class="visual-example">
-                    <p id="hideDemo" class="demo-text" style="background-color: #ffeb3b;">Je peux disparaître !</p>
-                    <button class="demo-button" onclick="toggleVisibility()">Montrer/Cacher</button>
-                </div>
+                <div class="question-title">Quelle balise HTML définit le contenu principal visible de la page ?</div>
                 <div class="code-example">
-document.getElementById("monElement").style.<span class="js-function">???</span> = "none";
+<span class="html-structure">&lt;html&gt;</span>
+  <span class="html-structure">&lt;head&gt;</span>...<span class="html-structure">&lt;/head&gt;</span>
+  <span class="html-structure">&lt;???&gt;</span>
+    <span class="html-structure">&lt;h1&gt;</span>Mon titre<span class="html-structure">&lt;/h1&gt;</span>
+    <span class="html-structure">&lt;p&gt;</span>Mon paragraphe<span class="html-structure">&lt;/p&gt;</span>
+  <span class="html-structure">&lt;/???&gt;</span>
+<span class="html-structure">&lt;/html&gt;</span>
                 </div>
                 <div class="answers">
-                    <div class="answer-option" data-answer="a">visibility</div>
-                    <div class="answer-option" data-answer="b">display</div>
-                    <div class="answer-option" data-answer="c">show</div>
+                    <div class="answer-option" data-answer="a">&lt;main&gt;</div>
+                    <div class="answer-option" data-answer="b">&lt;body&gt;</div>
+                    <div class="answer-option" data-answer="c">&lt;content&gt;</div>
                 </div>
             </div>
 
             <!-- Question 10 -->
             <div class="question-card" data-question="10">
                 <div class="question-number">10</div>
-                <div class="question-title">Quelle balise HTML utilise-t-on pour insérer du code CSS dans la page ?</div>
-                <div class="code-example">
-<span class="html-tag">&lt;???&gt;</span>
-  body { background-color: blue; }
-<span class="html-tag">&lt;/???&gt;</span>
+                <div class="question-title">Que fait la propriété CSS "width" ?</div>
+                <div class="visual-demo">
+                    <div class="demo-css-result">
+                        <div style="width: 100px; background-color: #ffeb3b; margin: 5px 0;">width: 100px</div>
+                        <div style="width: 200px; background-color: #4caf50; margin: 5px 0;">width: 200px</div>
+                        <div style="width: 50%; background-color: #2196f3; margin: 5px 0;">width: 50%</div>
+                    </div>
                 </div>
                 <div class="answers">
-                    <div class="answer-option" data-answer="a">&lt;css&gt;</div>
-                    <div class="answer-option" data-answer="b">&lt;style&gt;</div>
-                    <div class="answer-option" data-answer="c">&lt;design&gt;</div>
+                    <div class="answer-option" data-answer="a">Définit la largeur de l'élément</div>
+                    <div class="answer-option" data-answer="b">Définit la hauteur de l'élément</div>
+                    <div class="answer-option" data-answer="c">Définit la couleur de l'élément</div>
+                </div>
+            </div>
+
+            <!-- Question 11 -->
+            <div class="question-card" data-question="11">
+                <div class="question-number">11</div>
+                <div class="question-title">Que signifie "DOCTYPE html" au début d'une page ?</div>
+                <div class="code-example">
+<span class="html-structure">&lt;!DOCTYPE html&gt;</span>
+<span class="html-structure">&lt;html&gt;</span>
+...
+                </div>
+                <div class="answers">
+                    <div class="answer-option" data-answer="a">Indique que c'est du HTML5</div>
+                    <div class="answer-option" data-answer="b">Définit le titre de la page</div>
+                    <div class="answer-option" data-answer="c">Crée un lien vers une autre page</div>
+                </div>
+            </div>
+
+            <!-- Question 12 -->
+            <div class="question-card" data-question="12">
+                <div class="question-number">12</div>
+                <div class="question-title">Que fait la propriété CSS "font-style" ?</div>
+                <div class="visual-demo">
+                    <div class="demo-css-result">
+                        <p style="font-style: normal;">Texte normal</p>
+                        <p style="font-style: italic;">Texte en italique</p>
+                        <p style="font-style: oblique;">Texte oblique</p>
+                    </div>
+                </div>
+                <div class="answers">
+                    <div class="answer-option" data-answer="a">Change le style du texte (italique, normal...)</div>
+                    <div class="answer-option" data-answer="b">Change la taille du texte</div>
+                    <div class="answer-option" data-answer="c">Change la couleur du texte</div>
                 </div>
             </div>
 
@@ -487,12 +571,12 @@ document.getElementById("monElement").style.<span class="js-function">???</span>
             <div class="result-card" id="resultCard">
                 <div class="result-emoji" id="resultEmoji">🎉</div>
                 <div class="result-title" id="resultTitle">Félicitations !</div>
-                <div class="result-score" id="resultScore">Tu as obtenu 0/10</div>
+                <div class="result-score" id="resultScore">Tu as obtenu 0/12</div>
                 <button class="btn restart-btn" onclick="restartQuiz()">🔄 Recommencer</button>
             </div>
 
             <div class="controls">
-                <div class="score-display" id="scoreDisplay">Score: 0/10</div>
+                <div class="score-display" id="scoreDisplay">Score: 0/12</div>
                 <button class="btn" id="nextBtn" onclick="nextQuestion()" disabled>Suivant ➡️</button>
             </div>
         </div>
@@ -500,40 +584,23 @@ document.getElementById("monElement").style.<span class="js-function">???</span>
 
     <script>
         const questions = [
-            { correct: 'b' }, // ul pour liste non ordonnée
-            { correct: 'b' }, // background-color
-            { correct: 'a' }, // getElementById trouve l'élément
-            { correct: 'b' }, // id pour identifier
-            { correct: 'b' }, // font-weight pour gras
-            { correct: 'a' }, // innerHTML pour changer contenu
-            { correct: 'b' }, // button pour bouton
-            { correct: 'b' }, // padding pour espacement intérieur
-            { correct: 'b' }, // display pour cacher
-            { correct: 'b' }  // style pour CSS
+            { correct: 'a' }, // Structure HTML : html → head → body
+            { correct: 'b' }, // head contient les métadonnées
+            { correct: 'a' }, // p sélectionne tous les paragraphes
+            { correct: 'b' }, // font-size change la taille du texte
+            { correct: 'b' }, // #monTitre sélectionne par ID
+            { correct: 'a' }, // text-decoration ajoute des décorations
+            { correct: 'b' }, // .rouge sélectionne par classe
+            { correct: 'a' }, // border ajoute une bordure
+            { correct: 'b' }, // body contient le contenu visible
+            { correct: 'a' }, // width définit la largeur
+            { correct: 'a' }, // DOCTYPE html indique HTML5
+            { correct: 'a' }  // font-style change le style (italique)
         ];
 
         let currentQuestion = 0;
         let score = 0;
         let selectedAnswer = null;
-
-        // Fonctions de démonstration pour les exemples visuels
-        function changeText() {
-            const element = document.getElementById('demoText');
-            element.innerHTML = element.innerHTML === 'Texte original' ? 'Nouveau texte !' : 'Texte original';
-            element.style.backgroundColor = element.style.backgroundColor === 'rgb(76, 175, 80)' ? '#ffeb3b' : '#4CAF50';
-        }
-
-        let isHidden = false;
-        function toggleVisibility() {
-            const element = document.getElementById('hideDemo');
-            if (isHidden) {
-                element.style.display = 'block';
-                isHidden = false;
-            } else {
-                element.style.display = 'none';
-                isHidden = true;
-            }
-        }
 
         function updateProgress() {
             const progress = ((currentQuestion + 1) / questions.length) * 100;
@@ -619,16 +686,16 @@ document.getElementById("monElement").style.<span class="js-function">???</span>
 
             if (score === questions.length) {
                 resultEmoji.textContent = '🏆';
-                resultTitle.textContent = 'Parfait ! Tu es un champion !';
+                resultTitle.textContent = 'Parfait ! Maître du HTML/CSS !';
             } else if (score >= questions.length * 0.8) {
                 resultEmoji.textContent = '🎉';
-                resultTitle.textContent = 'Excellent travail !';
+                resultTitle.textContent = 'Excellent ! Tu maîtrises bien !';
             } else if (score >= questions.length * 0.6) {
                 resultEmoji.textContent = '👍';
-                resultTitle.textContent = 'Très bien !';
+                resultTitle.textContent = 'Très bien ! Continue !';
             } else if (score >= questions.length * 0.4) {
                 resultEmoji.textContent = '💪';
-                resultTitle.textContent = 'Pas mal, continue !';
+                resultTitle.textContent = 'Pas mal ! Encore un peu d\'effort !';
             } else {
                 resultEmoji.textContent = '🌱';
                 resultTitle.textContent = 'Continue à apprendre !';
@@ -641,12 +708,6 @@ document.getElementById("monElement").style.<span class="js-function">???</span>
             currentQuestion = 0;
             score = 0;
             selectedAnswer = null;
-            isHidden = false;
-
-            // Réinitialiser les démonstrations
-            document.getElementById('demoText').innerHTML = 'Texte original';
-            document.getElementById('demoText').style.backgroundColor = '#ffeb3b';
-            document.getElementById('hideDemo').style.display = 'block';
 
             document.querySelectorAll('.question-card').forEach((card, index) => {
                 card.classList.remove('active');
