@@ -1,34 +1,541 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <title>Changer la couleur du texte</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz HTML/CSS - Apprendre en s'amusant!</title>
     <style>
-        #monTexte {
-            font-size: 24px;
-            color: black;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        button {
-            margin: 5px;
-            padding: 10px;
-            font-size: 16px;
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(45deg, #ff6b6b, #ffa500);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .quiz-container {
+            padding: 30px;
+        }
+
+        .progress-bar {
+            background: #f0f0f0;
+            height: 10px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            height: 100%;
+            border-radius: 5px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .question-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 3px solid #e9ecef;
+            display: none;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .question-card.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .question-number {
+            background: #ff6b6b;
+            color: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .question-title {
+            font-size: 1.4em;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .code-example {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            font-size: 14px;
+            overflow-x: auto;
+        }
+
+        .answers {
+            display: grid;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .answer-option {
+            background: white;
+            border: 3px solid #e9ecef;
+            border-radius: 10px;
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .answer-option:hover {
+            border-color: #ffa500;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .answer-option.selected {
+            border-color: #4CAF50;
+            background: #e8f5e8;
+        }
+
+        .answer-option.correct {
+            border-color: #4CAF50;
+            background: #d4edda;
+            animation: correctPulse 0.6s ease;
+        }
+
+        .answer-option.incorrect {
+            border-color: #dc3545;
+            background: #f8d7da;
+            animation: shake 0.6s ease;
+        }
+
+        @keyframes correctPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .score-display {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .result-card {
+            text-align: center;
+            padding: 40px 20px;
+            display: none;
+        }
+
+        .result-card.active {
+            display: block;
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .result-emoji {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        .result-title {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .result-score {
+            font-size: 1.5em;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .restart-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ffa500);
+            font-size: 1.2em;
+            padding: 15px 30px;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .controls {
+                justify-content: center;
+            }
+            
+            .quiz-container {
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <div class="header">
+            <h1>🎮 Quiz HTML/CSS</h1>
+            <p>Apprends le code web en t'amusant !</p>
+        </div>
 
-    <h1 id="monTexte">Ceci est un texte coloré</h1>
+        <div class="quiz-container">
+            <div class="progress-bar">
+                <div class="progress" id="progressBar"></div>
+            </div>
 
-    <button onclick="changerCouleur('red')">Rouge</button>
-    <button onclick="changerCouleur('blue')">Bleu</button>
-    <button onclick="changerCouleur('green')">Vert</button>
-    <button onclick="changerCouleur('purple')">Violet</button>
+            <!-- Question 1 -->
+            <div class="question-card active" data-question="1">
+                <div class="question-number">1</div>
+                <div class="question-title">Que signifie HTML ?</div>
+                <div class="answers">
+                    <div class="answer-option" data-answer="a">HyperText Markup Language</div>
+                    <div class="answer-option" data-answer="b">Home Tool Markup Language</div>
+                    <div class="answer-option" data-answer="c">Hyperlinks and Text Markup Language</div>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question-card" data-question="2">
+                <div class="question-number">2</div>
+                <div class="question-title">Quelle balise HTML utilise-t-on pour créer un titre principal ?</div>
+                <div class="code-example">&lt;??? style="color: blue;"&gt;Mon super titre&lt;/???&gt;</div>
+                <div class="answers">
+                    <div class="answer-option" data-answer="a">&lt;title&gt;</div>
+                    <div class="answer-option" data-answer="b">&lt;h1&gt;</div>
+                    <div class="answer-option" data-answer="c">&lt;header&gt;</div>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question-card" data-question="3">
+                <div class="question-number">3</div>
+                <div class="question-title">En CSS, comment change-t-on la couleur du texte ?</div>
+                <div class="code-example">p {<br>  ??? : red;<br>}</div>
+                <div class="answers">
+                    <div class="answer-option" data-answer="a">background-color</div>
+                    <div class="answer-option" data-answer="b">color</div>
+                    <div class="answer-option" data-answer="c">text-color</div>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="question-card" data-question="4">
+                <div class="question-number">4</div>
+                <div class="question-title">Quelle balise utilise-t-on pour insérer une image ?</div>
+                <div class="answers">
+                    <div class="answer-option" data-answer="a">&lt;image&gt;</div>
+                    <div class="answer-option" data-answer="b">&lt;img&gt;</div>
+                    <div class="answer-option" data-answer="c">&lt;picture&gt;</div>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="question-card" data-question="5">
+                <div class="question-number">5</div>
+                <div class="question-title">Comment fait-on pour centrer un texte en CSS ?</div>
+                <div class="code-example">h1 {<br>  ??? : center;<br>}</div>
+                <div class="answers">
+                    <div class="answer-option" data-answer="a">align</div>
+                    <div class="answer-option" data-answer="b">text-align</div>
+                    <div class="answer-option" data-answer="c">center-text</div>
+                </div>
+            </div>
+
+            <!-- Question 6 -->
+            <div class="question-card" data-question="6">
+                <div class="question-number">6</div>
+                <div class="question-title">Quelle balise utilise-t-on pour créer un paragraphe ?</div>
+                <div class="answers">
+                    <div class="answer-option" data-answer="a">&lt;paragraph&gt;</div>
+                    <div class="answer-option" data-answer="b">&lt;p&gt;</div>
+                    <div class="answer-option" data-answer="c">&lt;text&gt;</div>
+                </div>
+            </div>
+
+            <!-- Question 7 -->
+            <div class="question-card" data-question="7">
+                <div class="question-number">7</div>
+                <div class="question-title">En CSS, comment change-t-on la taille de la police ?</div>
+                <div class="code-example">p {<br>  ??? : 20px;<br>}</div>
+                <div class="answers">
+                    <div class="answer-option" data-answer="a">font-size</div>
+                    <div class="answer-option" data-answer="b">text-size</div>
+                    <div class="answer-option" data-answer="c">size</div>
+                </div>
+            </div>
+
+            <!-- Question 8 -->
+            <div class="question-card" data-question="8">
+                <div class="question-number">8</div>
+                <div class="question-title">Quelle balise utilise-t-on pour créer un lien ?</div>
+                <div class="code-example">&lt;??? href="https://example.com"&gt;Cliquez ici&lt;/???&gt;</div>
+                <div class="answers">
+                    <div class="answer-option" data-answer="a">&lt;link&gt;</div>
+                    <div class="answer-option" data-answer="b">&lt;a&gt;</div>
+                    <div class="answer-option" data-answer="c">&lt;url&gt;</div>
+                </div>
+            </div>
+
+            <!-- Résultats -->
+            <div class="result-card" id="resultCard">
+                <div class="result-emoji" id="resultEmoji">🎉</div>
+                <div class="result-title" id="resultTitle">Félicitations !</div>
+                <div class="result-score" id="resultScore">Tu as obtenu 0/8</div>
+                <button class="btn restart-btn" onclick="restartQuiz()">🔄 Recommencer</button>
+            </div>
+
+            <div class="controls">
+                <div class="score-display" id="scoreDisplay">Score: 0/8</div>
+                <button class="btn" id="nextBtn" onclick="nextQuestion()" disabled>Suivant ➡️</button>
+            </div>
+        </div>
+    </div>
 
     <script>
-        function changerCouleur(couleur) {
-            document.getElementById('monTexte').style.color = couleur;
+        const questions = [
+            { correct: 'a' }, // HTML = HyperText Markup Language
+            { correct: 'b' }, // h1 pour titre principal
+            { correct: 'b' }, // color pour couleur du texte
+            { correct: 'b' }, // img pour image
+            { correct: 'b' }, // text-align pour centrer
+            { correct: 'b' }, // p pour paragraphe
+            { correct: 'a' }, // font-size pour taille police
+            { correct: 'b' }  // a pour lien
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let selectedAnswer = null;
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function updateScore() {
+            document.getElementById('scoreDisplay').textContent = `Score: ${score}/${questions.length}`;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const answerOptions = document.querySelectorAll('.answer-option');
+            
+            answerOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Empêcher de changer de réponse après avoir répondu
+                    const currentCard = document.querySelector(`.question-card[data-question="${currentQuestion + 1}"]`);
+                    const alreadyAnswered = currentCard.querySelector('.answer-option.correct, .answer-option.incorrect');
+                    
+                    if (alreadyAnswered) return;
+
+                    // Enlever la sélection précédente
+                    currentCard.querySelectorAll('.answer-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+
+                    // Sélectionner la nouvelle réponse
+                    this.classList.add('selected');
+                    selectedAnswer = this.dataset.answer;
+
+                    // Vérifier la réponse immédiatement
+                    checkAnswer();
+                });
+            });
+
+            updateProgress();
+            updateScore();
+        });
+
+        function checkAnswer() {
+            const currentCard = document.querySelector(`.question-card[data-question="${currentQuestion + 1}"]`);
+            const options = currentCard.querySelectorAll('.answer-option');
+            const correctAnswer = questions[currentQuestion].correct;
+
+            options.forEach(option => {
+                if (option.dataset.answer === correctAnswer) {
+                    option.classList.add('correct');
+                } else if (option.dataset.answer === selectedAnswer && selectedAnswer !== correctAnswer) {
+                    option.classList.add('incorrect');
+                }
+            });
+
+            if (selectedAnswer === correctAnswer) {
+                score++;
+                updateScore();
+            }
+
+            // Activer le bouton suivant après un délai
+            setTimeout(() => {
+                document.getElementById('nextBtn').disabled = false;
+            }, 1000);
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                // Passer à la question suivante
+                document.querySelector(`.question-card[data-question="${currentQuestion + 1}"]`).classList.remove('active');
+                currentQuestion++;
+                document.querySelector(`.question-card[data-question="${currentQuestion + 1}"]`).classList.add('active');
+                
+                selectedAnswer = null;
+                document.getElementById('nextBtn').disabled = true;
+                updateProgress();
+            } else {
+                // Afficher les résultats
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.querySelector('.question-card.active').classList.remove('active');
+            document.querySelector('.controls').style.display = 'none';
+            
+            const resultCard = document.getElementById('resultCard');
+            const resultEmoji = document.getElementById('resultEmoji');
+            const resultTitle = document.getElementById('resultTitle');
+            const resultScore = document.getElementById('resultScore');
+
+            resultScore.textContent = `Tu as obtenu ${score}/${questions.length}`;
+
+            if (score === questions.length) {
+                resultEmoji.textContent = '🏆';
+                resultTitle.textContent = 'Parfait !';
+            } else if (score >= questions.length * 0.7) {
+                resultEmoji.textContent = '🎉';
+                resultTitle.textContent = 'Très bien !';
+            } else if (score >= questions.length * 0.5) {
+                resultEmoji.textContent = '👍';
+                resultTitle.textContent = 'Pas mal !';
+            } else {
+                resultEmoji.textContent = '💪';
+                resultTitle.textContent = 'Continue tes efforts !';
+            }
+
+            resultCard.classList.add('active');
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            selectedAnswer = null;
+
+            // Réinitialiser toutes les questions
+            document.querySelectorAll('.question-card').forEach((card, index) => {
+                card.classList.remove('active');
+                if (index === 0) card.classList.add('active');
+                
+                card.querySelectorAll('.answer-option').forEach(option => {
+                    option.classList.remove('selected', 'correct', 'incorrect');
+                });
+            });
+
+            // Réinitialiser les contrôles
+            document.getElementById('resultCard').classList.remove('active');
+            document.querySelector('.controls').style.display = 'flex';
+            document.getElementById('nextBtn').disabled = true;
+
+            updateProgress();
+            updateScore();
         }
     </script>
-
 </body>
 </html>
